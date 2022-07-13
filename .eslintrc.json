@@ -1,0 +1,99 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "build"
+  ],
+
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "prettier",
+    "import",
+    "@typescript-eslint/eslint-plugin"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "import/no-unresolved": [
+      2,
+      {
+        "caseSensitive": false
+      }
+    ],
+    "import/order": [
+      2,
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always"
+      }
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      0,
+      "unix"
+    ],
+    "prettier/prettier": "error",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": "off",
+    "semi": [
+      "error",
+      "never"
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ],
+        "moduleDirectory": [
+          "node_modules",
+          "src/"
+        ]
+      }
+    }
+  }
+}

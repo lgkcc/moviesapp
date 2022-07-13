@@ -1,0 +1,138 @@
+.home {
+  min-height: calc(100vh - 20px);
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    justify-content: flex-start;
+  }
+  input {
+    min-width: 100%;
+    margin-bottom: 10px;
+  }
+  .alert{
+    width: 310px;
+    justify-content: flex-start;
+  }
+  .content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 35px;
+    margin-bottom: 30px;
+    @media screen and (max-width: 860px){
+      grid-template-columns: repeat(1, 1fr);
+      justify-items: center;
+      .card {
+        max-width: 100%;
+        img {
+          width: 180px;
+          min-height: 290px;
+          max-height: 290px;
+        }
+        .rate {
+          margin-left: 0;
+          left: inherit;
+        }
+      }
+    }
+    @media screen and (max-width: 550px){
+      .card {
+        img {
+          width: 160px;
+          min-height: 250px;
+          max-height: 250px;
+        }
+        .rate {
+          left: 50%;
+          margin-left: -136px;
+        }
+      }
+    }
+  }
+  .rate {
+    position: absolute;
+    bottom: 10px;
+
+  }
+  .mark {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border: 3px #E90000 solid;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    &.normal {
+      border-color: #E97E00;
+    }
+    &.good {
+      border-color: #E9D100;
+    }
+    &.excellent{
+      border-color: #66E900;
+    }
+  }
+  :global{
+    .ant-spin-dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+    .ant-alert-content {
+      flex: 0;
+    }
+  }
+  .card {
+    display: flex;
+    width: 100%;
+    max-width: 475px;
+    min-height: 291px;
+    max-height: 291px;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.24);
+    :global{
+      .ant-card-meta-title{
+        white-space: normal;
+        margin-right: 22px;
+        line-height: 16px;
+        margin-bottom: 5px;
+      }
+      .ant-card-body{
+        padding: 12px;
+      }
+    }
+    img {
+      width: 180px;
+      min-height: 290px;
+      max-height: 290px;
+      border-right: 1px rgba(204, 204, 204, 0.27) solid;
+    }
+    @media screen and (max-width: 1035px){
+      .card {
+
+      }
+      img {
+        width: 160px;
+        min-height: 250px;
+        max-height: 250px;
+      }
+      .rate {
+        left: 50%;
+        margin-left: -136px;
+      }
+    }
+  }
+  .tag {
+    margin: 0 5px 5px 0;
+    &:first-of-type{
+      margin-left: 0;
+    }
+    &:last-of-type{
+      margin-right: 0;
+    }
+  }
+}

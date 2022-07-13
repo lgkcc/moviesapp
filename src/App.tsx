@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useEffect, useState } from 'react'
+import axios from 'axios'
 
-function App() {
+import Home from './pages/Home'
+
+export const GenreContext = createContext<any>(null)
+
+const App = () => {
+  const [genre, setGenre] = useState({})
+  useEffect(() => {
+    const getGenre = async () => {
+      const { data } = await axios.get(
+        'https://api.themoviedb.org/3/genre/movie/list?api_key=396eb3ae36fb979105321e5b3e0c9d43&language=ru-RU'
+      )
+      return data
+    }
+    getGenre().then((res) => setGenre(res))
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <GenreContext.Provider value={genre}>
+        <Home />
+      </GenreContext.Provider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
