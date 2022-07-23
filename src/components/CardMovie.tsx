@@ -59,7 +59,7 @@ const CardMovie = ({ movie, addedMark, mark }: ICardMovieProps) => {
         description={`${
           movie?.overview.split(' ').slice(0, 15).join(' ') ||
           'К данному фильму нету описания :('
-        }${movie?.overview.split(' ').length > 15 ? '...' : ''}`}
+        }${movie?.overview.split(' ').length > (15 || 0) ? '...' : ''}`}
       />
       <Rate
         allowHalf

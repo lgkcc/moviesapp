@@ -3,13 +3,13 @@ import { Spin, Alert, Input, Tabs } from 'antd'
 import axios from 'axios'
 import debounce from 'lodash.debounce'
 
-import MoviesList, { LocalMark } from '../components/MoviesList'
+import MoviesList, { TLocalMark } from '../components/MoviesList'
 
 import classes from './Home.module.scss'
 
 const { TabPane } = Tabs
 
-export type MoviesAll = {
+export type TMoviesAll = {
   page: number
   results: Movie[]
   total_pages: number
@@ -36,13 +36,13 @@ export type TabsType = TabsEnum.SEARCH | TabsEnum.RATED
 const tabsArray: TabsType[] = [TabsEnum.SEARCH, TabsEnum.RATED]
 
 const Home: React.FC = () => {
-  const [movies, setMovies] = useState<MoviesAll | null>(null)
+  const [movies, setMovies] = useState<TMoviesAll | null>(null)
   const [error, setError] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
   const [searchValue, setSearchValue] = useState<string>('')
   const [page, setPage] = useState<number>(1)
   const [tabState, setTabState] = useState<TabsType>(TabsEnum.SEARCH)
-  const [currentMark, setCurrentMark] = useState<LocalMark[]>([])
+  const [currentMark, setCurrentMark] = useState<TLocalMark[]>([])
 
   useEffect(() => {
     const localStorageMovie = localStorage.getItem('movie')
@@ -50,11 +50,11 @@ const Home: React.FC = () => {
   }, [])
 
   const addedMark = (value: number, movie: Movie) => {
-    const isFindMark: LocalMark | undefined = currentMark.find(
+    const isFindMark: TLocalMark | undefined = currentMark.find(
       (mark) => mark.id === movie.id
     )
     if (isFindMark) {
-      const updateMark = currentMark.map((mark: LocalMark) => {
+      const updateMark = currentMark.map((mark: TLocalMark) => {
         if (mark.id === movie.id) {
           return { ...mark, mark: value }
         }
@@ -82,10 +82,7 @@ const Home: React.FC = () => {
     const fetchMovie = async () => {
       try {
         if (!searchValue) {
-          const { data } = await axios.get(
-            `https://api.themoviedb.org/3/movie/popular?api_key=396eb3ae36fb979105321e5b3e0c9d43&language=ru-RU&page=${page}`
-          )
-          return data
+          return null
         }
         const { data } = await axios.get(
           `https://api.themoviedb.org/3/search/movie?api_key=396eb3ae36fb979105321e5b3e0c9d43&query=${searchValue}&language=ru-RU&page=${page}`
@@ -139,7 +136,7 @@ const Home: React.FC = () => {
             <TabPane tab={tab} key={keys[index]}>
               {tab === TabsEnum.SEARCH && (
                 <Input
-                  placeholder="Поиск фильмов..."
+                  placeholder="Type to search..."
                   value={inputValue}
                   onChange={inputChange}
                 />
